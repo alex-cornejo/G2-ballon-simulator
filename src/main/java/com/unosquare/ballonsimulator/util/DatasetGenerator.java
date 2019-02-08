@@ -1,6 +1,7 @@
 package com.unosquare.ballonsimulator.util;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -21,6 +22,12 @@ public class DatasetGenerator {
 
     public void execute() throws IOException {
 
+        //remove old file if exists
+        File file = new File(this.outputFile);
+        if(file.exists()){
+            file.delete();
+        }
+
         int chunks = (int) Math.ceil((float) recordsAmount / Consts.BATCH_SIZE);
 
         for (int iChunk = 0; iChunk < chunks; iChunk++) {
@@ -30,7 +37,7 @@ public class DatasetGenerator {
             } else {
                 tempAmount = Consts.BATCH_SIZE;
             }
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(this.outputFile, true))) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
                 for (int iRecord = 0; iRecord < tempAmount; iRecord++) {
                     bw.write(RecordBallon.createRandomRecord().toString() + "\n");
                 }
