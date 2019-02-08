@@ -97,7 +97,7 @@ public class Observatory {
             { TempsEquivs.K_TO_C, TempsEquivs.K_TO_F, TempsEquivs.T_TO_T, TempsEquivs.T_TO_T },
             { TempsEquivs.K_TO_C, TempsEquivs.K_TO_F, TempsEquivs.T_TO_T, TempsEquivs.T_TO_T } };
 
-    public static float getDistEquiv(ObservatoryEnum obs1, int amount, ObservatoryEnum obs2) {
+    public static float getDistEquiv(ObservatoryEnum obs1, float amount, ObservatoryEnum obs2) {
         return DISTANCE_EQUIVALENCE[obs1.getIndex()][obs2.getIndex()] * amount;
     }
 
