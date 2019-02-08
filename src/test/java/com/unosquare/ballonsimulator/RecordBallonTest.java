@@ -22,7 +22,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 public class RecordBallonTest {
 
     @Rule
-    private final ExpectedException thrown = ExpectedException.none();
+    public final ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void createRecordBallonTest() {
