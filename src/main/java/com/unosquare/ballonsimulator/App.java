@@ -1,11 +1,37 @@
 package com.unosquare.ballonsimulator;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import com.unosquare.ballonsimulator.util.DatasetGenerator;
 
 public class App {
 
     private static void generateDataset() {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.print("\nPlease enter the amount of records for your dataset: ");
+            int amount = scanner.nextInt();
+            System.out.print("Please enter your dataset output file name: ");
+            String outputFile = scanner.next();
+            DatasetGenerator dsg = new DatasetGenerator(outputFile, amount);
+
+            dsg.execute();
+            System.out.println("\n'" + outputFile + "' generated in the root of this program" );
+        } catch (InputMismatchException e) {
+            e.printStackTrace();
+            System.out.println("Invalid data...");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("An error ocurred while genereting your dataset...");
+        }
+
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -38,10 +64,12 @@ public class App {
             switch (option) {
             case 1:
                 generateDataset();
+                repeat = true;
                 break;
 
             case 2:
                 processDataset();
+                repeat = true;
                 break;
 
             case 9:
@@ -52,9 +80,6 @@ public class App {
                 System.out.println("You must choose a valid option!!!");
                 repeat = true;
                 break;
-            }
-            if (!repeat) {
-                scanner.close();
             }
             try {
                 Thread.sleep(1500);
