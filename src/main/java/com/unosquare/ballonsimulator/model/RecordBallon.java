@@ -1,7 +1,12 @@
 package com.unosquare.ballonsimulator.model;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Random;
+
+import com.unosquare.ballonsimulator.model.Observatory.ObservatoryEnum;
 
 /**
  * RecordBallon
@@ -14,6 +19,13 @@ public class RecordBallon implements Comparable<RecordBallon> {
     private Observatory.ObservatoryEnum observatory;
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+
+    private RecordBallon(LocalDateTime timestamp, int[] location, int temperature, ObservatoryEnum observatory) {
+        this.timestamp = timestamp;
+        this.location = location;
+        this.temperature = temperature;
+        this.observatory = observatory;
+    }
 
     public RecordBallon(String pattern) {
         String[] data = pattern.split("\\|");
@@ -86,4 +98,19 @@ public class RecordBallon implements Comparable<RecordBallon> {
         return this.timestamp.compareTo(recordBallon.timestamp);
     }
 
+    public static RecordBallon createRandomRecord() {
+
+        Random rnd = new Random();
+
+        LocalDateTime start = LocalDateTime.of(1970, Month.JANUARY, 1, 0, 0);
+        long days = ChronoUnit.DAYS.between(start, LocalDateTime.now());
+        LocalDateTime timestamp = start.plusDays(rnd.nextInt((int) days + 1)).plusHours(rnd.nextInt(23))
+                .plusMinutes(rnd.nextInt(59));
+
+        int[] location = { rnd.nextInt(10), rnd.nextInt(10) };
+        int temperature = rnd.nextInt(100);
+        ObservatoryEnum observatory = ObservatoryEnum.values()[rnd.nextInt(ObservatoryEnum.values().length - 1)];
+
+        return new RecordBallon(timestamp, location, temperature, observatory);
+    }
 }
