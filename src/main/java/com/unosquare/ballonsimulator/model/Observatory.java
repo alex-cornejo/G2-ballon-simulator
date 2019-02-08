@@ -53,19 +53,19 @@ public class Observatory {
         F_TO_K {
             @Override
             public float convert(float t) {
-                return 0f;
+                return (t - 32) * 5/9 + 273.15f;
             }
         },
         K_TO_C {
             @Override
             public float convert(float t) {
-                return 0f;
+                return t - 273.15f;
             }
         },
         K_TO_F {
             @Override
             public float convert(float t) {
-                return 0f;
+                return (t - 273.15f) * 9/5 + 32;
             }
         },
         T_TO_T {
