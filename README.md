@@ -1,14 +1,14 @@
-# Requirements
+### Requirements
 * To have Java 8 installed and added to the environment path
 * To have Maven installed and added to the environment path
 
-# Run unit tests
-mvn test
+### Run unit tests
+`mvn test`
 
-# Excecute program
-mvn clean compile exec:java
+### Excecute program
+`mvn clean compile exec:java`
 
-# Details
+### Details
 
 This tool uses two different graphs to handle the conversions of the units, these graphs graphs assume that obervatory units are the follow:
 
@@ -40,9 +40,9 @@ This graph contains different functions according to the algorithm necessary to 
 |Other| K_TO_C | K_TO_F | T_TO_T | T_TO_T |
 
 where:
-${A_TO_B} is a function to convert from the unit A to the unit B, A and B can take the values:
+${A_TO_B} is a function to convert from the unit *A* to the unit *B*, *A* and *B* can take the values:  
 
-C=Celsius
-F=Fahrenheit
-K=Kelvin
-T=Any temperature unit
+C=Celsius  
+F=Fahrenheit  
+K=Kelvin  
+T=Any temperature unit  
