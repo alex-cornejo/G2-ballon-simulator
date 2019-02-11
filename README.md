@@ -47,6 +47,9 @@ F=Fahrenheit
 K=Kelvin  
 T=Any temperature unit  
 
+### General assumptions
+- The distance computed is the Euclidean distance.
+- Only 100 lines fit in memory, so batches generated are in 100 lines.
 
 ### Assumptions of Datasets generation
 - The range of random temperatures is the same for all observatories [0, 100]
