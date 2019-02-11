@@ -126,7 +126,7 @@ public class RecordBallon implements Comparable<RecordBallon> {
 
         int[] location = { rnd.nextInt(10), rnd.nextInt(10) };
         int temperature = rnd.nextInt(100);
-        ObservatoryEnum observatory = ObservatoryEnum.values()[rnd.nextInt(ObservatoryEnum.values().length - 1)];
+        ObservatoryEnum observatory = ObservatoryEnum.values()[rnd.nextInt(ObservatoryEnum.values().length)];
 
         return new RecordBallon(timestamp, location, temperature, observatory);
     }

@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import com.unosquare.ballonsimulator.model.Observatory.ObservatoryEnum;
 import com.unosquare.ballonsimulator.util.DatasetGenerator;
+import com.unosquare.ballonsimulator.util.DatasetProcessor;
+import com.unosquare.ballonsimulator.util.ExternalMergeSort;
 
 public class App {
 
@@ -65,8 +67,15 @@ public class App {
                 break;
             }
             if (option != 9) {
-                System.out.print("Please enter your dataset output file name: ");
+                System.out.print("\nPlease enter your input dataset file name (it must exist): ");
+                String inputFile = scanner.next();
+                System.out.print("Please enter your output dataset file name: ");
                 String outputFile = scanner.next();
+                ExternalMergeSort ems = new ExternalMergeSort();
+                ems.sortDataset(inputFile);
+
+                DatasetProcessor dsp = new DatasetProcessor();
+                dsp.processDataset("tmp/datasetsorted.txt", outputFile, obs);
 
                 System.out.println("\n'" + outputFile + "' generated in the root of this program");
             }

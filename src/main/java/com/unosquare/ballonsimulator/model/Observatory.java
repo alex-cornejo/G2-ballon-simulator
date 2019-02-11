@@ -6,14 +6,19 @@ package com.unosquare.ballonsimulator.model;
 public class Observatory {
 
     public enum ObservatoryEnum {
-        AU(0, "AU"), US(1, "US"), FR(2, "FR"), OTHER(3, "Other");
+        AU(0, "AU", "celsius", "km"), US(1, "US", "fahrenheit", "miles"), FR(2, "FR", "kelvin", "m"),
+        OTHER(3, "Other", "kelvin", "km");
 
         private final int index;
         private final String code;
+        private final String tempUnit;
+        private final String distUnit;
 
-        ObservatoryEnum(int index, String code) {
+        ObservatoryEnum(int index, String code, String tempUnit, String distUnit) {
             this.index = index;
             this.code = code;
+            this.tempUnit = tempUnit;
+            this.distUnit = distUnit;
         }
 
         public int getIndex() {
@@ -22,6 +27,14 @@ public class Observatory {
 
         public String getCode() {
             return this.code;
+        }
+
+        public String getTempUnit() {
+            return this.tempUnit;
+        }
+
+        public String getDistUnit() {
+            return this.distUnit;
         }
     }
 
@@ -35,25 +48,25 @@ public class Observatory {
         C_TO_F {
             @Override
             public float convert(float t) {
-                return (t*9/5)+32;
+                return (t * 9 / 5) + 32;
             }
         },
         C_TO_K {
             @Override
             public float convert(float t) {
-                return t+273.15f;
+                return t + 273.15f;
             }
         },
         F_TO_C {
             @Override
             public float convert(float t) {
-                return (t-32) * 5/9;
+                return (t - 32) * 5 / 9;
             }
         },
         F_TO_K {
             @Override
             public float convert(float t) {
-                return (t - 32) * 5/9 + 273.15f;
+                return (t - 32) * 5 / 9 + 273.15f;
             }
         },
         K_TO_C {
@@ -65,7 +78,7 @@ public class Observatory {
         K_TO_F {
             @Override
             public float convert(float t) {
-                return (t - 273.15f) * 9/5 + 32;
+                return (t - 273.15f) * 9 / 5 + 32;
             }
         },
         T_TO_T {
@@ -99,6 +112,14 @@ public class Observatory {
 
     public static float getDistEquiv(ObservatoryEnum obs1, float amount, ObservatoryEnum obs2) {
         return DISTANCE_EQUIVALENCE[obs1.getIndex()][obs2.getIndex()] * amount;
+    }
+
+    public static float[] getDistEquiv(ObservatoryEnum obs1, int[] items, ObservatoryEnum obs2) {
+        float[] equiv = new float[items.length];
+        for (int i = 0; i < equiv.length; i++) {
+            equiv[i] = DISTANCE_EQUIVALENCE[obs1.getIndex()][obs2.getIndex()] * items[i];
+        }
+        return equiv;
     }
 
     public static float getTempEquiv(ObservatoryEnum obs1, float temp, ObservatoryEnum obs2) {
