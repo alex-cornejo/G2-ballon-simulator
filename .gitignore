@@ -28,3 +28,6 @@ buildNumber.properties
 .editorconfig
 .gitattributes
 .travis.yml
+
+# custom
+tmp/

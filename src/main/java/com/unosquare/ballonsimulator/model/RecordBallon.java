@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Random;
 
 import com.unosquare.ballonsimulator.model.Observatory.ObservatoryEnum;
@@ -96,6 +98,21 @@ public class RecordBallon implements Comparable<RecordBallon> {
     @Override
     public int compareTo(RecordBallon recordBallon) {
         return this.timestamp.compareTo(recordBallon.timestamp);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null && obj instanceof RecordBallon) {
+            RecordBallon otherRecord = (RecordBallon) obj;
+            return timestamp.equals(otherRecord.timestamp) && Arrays.equals(location, otherRecord.location)
+                    && temperature == otherRecord.temperature && observatory == otherRecord.observatory;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(timestamp, location, temperature, observatory);
     }
 
     public static RecordBallon createRandomRecord() {
