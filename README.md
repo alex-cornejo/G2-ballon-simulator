@@ -55,3 +55,13 @@ T=Any temperature unit
 - Records of dataset are generated unsorted but all of them keep the right format 
 
 NOTE: Previous configs can be changed on class "RecordBallon"
+
+### How it process the datasets
+It uses the external merge sort algorithm to sort a large file which does not fit in memory.
+External sorting ->  https://en.wikipedia.org/wiki/External_sorting
+
+1. The large dataset is splited in multiple datasets which are called batches.
+2. Every batch is sorted in memory and written on disk.
+3. Mini batches are loaded in memory and are merged in a output sorteddataset file.
+4. Sorted dataset is read from the disk line by line and the requirements are computed (Previous graphs are used in this step to do the conversions between the observatories).
+5. Final result is printed and logged. 
