@@ -26,10 +26,11 @@ public class ExternalMergeSort {
     private int chunks;
 
     /**
-     * Sort any large dataset using an External Sort algorithm
-     * 1. The large dataset is splited in multiple datasets which are called batches.
-     * 2. Every batch is sorted in memory and written on disk.
-     * 3. Mini batches are loaded in memory and are merged in a single output sorteddataset file.
+     * Sort any large dataset using an External Sort algorithm 1. The large dataset
+     * is splited in multiple datasets which are called batches. 2. Every batch is
+     * sorted in memory and written on disk. 3. Mini batches are loaded in memory
+     * and are merged in a single output sorteddataset file.
+     * 
      * @param filePath path of the input large dataset
      * @throws IOException
      */
@@ -54,7 +55,7 @@ public class ExternalMergeSort {
             writeBatch(miniDataset, false, recordsBallon);
         }
 
-        //put mini batches in memory
+        // put mini batches in memory
         int miniBatchSize = Consts.BATCH_SIZE / (chunks + 1);
         Map<Integer, LinkedList<RecordBallon>> miniBatches = new LinkedHashMap<>();
         Map<Integer, BufferedReader> readers = new HashMap<>();
@@ -66,7 +67,7 @@ public class ExternalMergeSort {
             indexBatch++;
         }
 
-        //merge mini batches in a single file
+        // merge mini batches in a single file
         File datasetMerged = new File(TMP_DIRECTORY + "/datasetsorted.txt");
         List<RecordBallon> batchMerged = new ArrayList<>(miniBatchSize);
         while (!miniBatches.isEmpty()) {
@@ -97,11 +98,13 @@ public class ExternalMergeSort {
             if (miniBatches.get(indexBatch).isEmpty()) {
 
                 // if file does not have more items, it is excluded
-                List<RecordBallon> newMiniBatch = getNextMiniBatch(readers.get(indexBatch), miniBatchSize);
+                LinkedList<RecordBallon> newMiniBatch = getNextMiniBatch(readers.get(indexBatch), miniBatchSize);
                 if (newMiniBatch.isEmpty()) {
                     readers.get(indexBatch).close();
                     readers.remove(indexBatch);
                     miniBatches.remove(indexBatch);
+                } else {
+                    miniBatches.put(indexBatch, newMiniBatch);
                 }
             }
         }
@@ -134,7 +137,8 @@ public class ExternalMergeSort {
         LinkedList<RecordBallon> miniBatch = new LinkedList<>();
         try {
             if (reader.ready()) {
-                for (String line; (line = reader.readLine()) != null;) {
+                int count = 0;
+                for (String line; count < miniBatchSize && (line = reader.readLine()) != null; count++) {
                     RecordBallon recordBallon = new RecordBallon(line);
                     miniBatch.add(recordBallon);
                 }
