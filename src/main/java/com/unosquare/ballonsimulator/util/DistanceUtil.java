@@ -13,4 +13,13 @@ public class DistanceUtil {
         dist = (float) Math.sqrt(dist);
         return dist;
     }
+
+    public static float computeEucDist(float[] p1, float[] p2) {
+        float dist = 0;
+        for (int i = 0; i < p1.length; i++) {
+            dist += Math.pow(p1[i] - p2[i], 2);
+        }
+        dist = (float) Math.sqrt(dist);
+        return dist;
+    }
 }
