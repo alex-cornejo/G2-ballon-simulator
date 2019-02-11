@@ -36,6 +36,22 @@ public class DatasetProcessor {
         observatories.put(ObservatoryEnum.OTHER, 0);
     }
 
+    /**
+     * Sorted dataset is read from the disk line by line and next the requirements are computed.
+     * min temperature 
+     * max temperature 
+     * average of temperature 
+     * total items per observatory in the dataset 
+     * total distance travelled
+     * 
+     * Final result is printed and logged.
+     * It assumes the input dataset is sorted
+     *
+     * @param inputFile large dataset to be processed
+     * @param outputFile output of the result
+     * @param obsDesired observatory unit desired
+     * @throws IOException
+     */
     public void processDataset(String inputFile, String outputFile, ObservatoryEnum obsDesired) throws IOException {
 
         RecordBallon previousRecord = null;

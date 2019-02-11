@@ -115,6 +115,10 @@ public class RecordBallon implements Comparable<RecordBallon> {
         return Objects.hash(timestamp, location, temperature, observatory);
     }
 
+    /**
+     * A RecordBallon object is generated with random properties
+     * @return random RecordBallon object
+     */
     public static RecordBallon createRandomRecord() {
 
         Random rnd = new Random();

@@ -43,7 +43,8 @@ public class Observatory {
         float convert(float t);
     }
 
-    public enum TempsEquivs implements TempConverter {
+    
+    private enum TempsEquivs implements TempConverter {
 
         C_TO_F {
             @Override
@@ -89,6 +90,12 @@ public class Observatory {
         };
     }
 
+    /**
+     * Returns the ObservatoryEnum item regarding to the observatory code
+     * If the code is not recognized, OTHER observatory item is returned
+     * @param code
+     * @return ObservatoryEnum item
+     */
     public static ObservatoryEnum getObservatory(String code) {
         try {
             return ObservatoryEnum.valueOf(code);
@@ -109,10 +116,24 @@ public class Observatory {
             { TempsEquivs.K_TO_C, TempsEquivs.K_TO_F, TempsEquivs.T_TO_T, TempsEquivs.T_TO_T },
             { TempsEquivs.K_TO_C, TempsEquivs.K_TO_F, TempsEquivs.T_TO_T, TempsEquivs.T_TO_T } };
 
+    /**
+     * It converts the distance from one observatory unit to another one
+     * @param obs1 origin observatory 
+     * @param amount distance you want convert
+     * @param obs2 target observatory
+     * @return distance converted
+     */
     public static float getDistEquiv(ObservatoryEnum obs1, float amount, ObservatoryEnum obs2) {
         return DISTANCE_EQUIVALENCE[obs1.getIndex()][obs2.getIndex()] * amount;
     }
 
+    /**
+     * It converts a vector of numbers from one observatory unit to another one
+     * @param obs1 origin observatory 
+     * @param items vector to be converted
+     * @param obs2 target observatory
+     * @return
+     */
     public static float[] getDistEquiv(ObservatoryEnum obs1, int[] items, ObservatoryEnum obs2) {
         float[] equiv = new float[items.length];
         for (int i = 0; i < equiv.length; i++) {
@@ -121,6 +142,13 @@ public class Observatory {
         return equiv;
     }
 
+    /**
+     * It converts the temperature from one observatory unit to another one
+     * @param obs1 origin observatory 
+     * @param temp temperature number you want convert
+     * @param obs2 target observatory
+     * @return distance converted
+     */
     public static float getTempEquiv(ObservatoryEnum obs1, float temp, ObservatoryEnum obs2) {
         return TEMPERATURE_EQUIVALENCE[obs1.getIndex()][obs2.getIndex()].convert(temp);
     }
