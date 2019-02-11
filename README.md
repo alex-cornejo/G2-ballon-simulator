@@ -46,3 +46,11 @@ C=Celsius
 F=Fahrenheit  
 K=Kelvin  
 T=Any temperature unit  
+
+
+### Assumptions of Datasets generation
+- The range of random temperatures is the same for all observatories [0, 100]
+- The range of random locations is positive and the same for all observatories [0, 10] 
+- The range of random timestamps is from 1970 to current date
+
+NOTE: Previous configs can be changed on class "RecordBallon"
