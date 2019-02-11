@@ -20,6 +20,10 @@ public class DatasetGenerator {
         this.recordsAmount = recordsAmount;
     }
 
+    /**
+     * Generates a dataset with random RecordBallons items, the amount of record must be provided in constructor
+     * @throws IOException if there is any issue when written the dataset
+     */
     public void execute() throws IOException {
 
         // remove old file if exists

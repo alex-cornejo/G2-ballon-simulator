@@ -25,6 +25,14 @@ public class ExternalMergeSort {
 
     private int chunks;
 
+    /**
+     * Sort any large dataset using an External Sort algorithm
+     * 1. The large dataset is splited in multiple datasets which are called batches.
+     * 2. Every batch is sorted in memory and written on disk.
+     * 3. Mini batches are loaded in memory and are merged in a single output sorteddataset file.
+     * @param filePath path of the input large dataset
+     * @throws IOException
+     */
     public void sortDataset(String filePath) throws IOException {
         removeTmpFiles();
         splitDataset(filePath);
