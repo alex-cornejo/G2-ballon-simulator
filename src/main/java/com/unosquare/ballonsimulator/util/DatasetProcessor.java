@@ -80,8 +80,7 @@ public class DatasetProcessor {
         avgTemp /= count;
 
         printDetails(obsDesired);
-        
-
+        logDetails(outputFile, obsDesired);
     }
 
     private void printDetails(ObservatoryEnum obsDesired) {
@@ -98,7 +97,7 @@ public class DatasetProcessor {
 
     private void logDetails(String outputFile, ObservatoryEnum obsDesired) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
-        writer.write("\nData is in " + obsDesired + " observatory...\n");
+        writer.write("\nData is in " + obsDesired + " observatory...\n\n");
         writer.write("Minimum temperature registered " + minTemp+" "+obsDesired.getTempUnit());
         writer.newLine();
         writer.write("Maximum temperature registered " + maxTemp+" "+obsDesired.getTempUnit());
@@ -115,4 +114,23 @@ public class DatasetProcessor {
         writer.close();
     }
 
+    public float getMinTemp() {
+        return minTemp;
+    }
+
+    public float getMaxTemp() {
+        return maxTemp;
+    }
+
+    public float getAvgTemp() {
+        return avgTemp;
+    }
+
+    public Map<ObservatoryEnum, Integer> getObservatories() {
+        return observatories;
+    }
+
+    public float getDist() {
+        return dist;
+    }
 }
