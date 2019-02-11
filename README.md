@@ -52,5 +52,6 @@ T=Any temperature unit
 - The range of random temperatures is the same for all observatories [0, 100]
 - The range of random locations is positive and the same for all observatories [0, 10] 
 - The range of random timestamps is from 1970 to current date
+- Records of dataset are generated unsorted but all of them keep the right format 
 
 NOTE: Previous configs can be changed on class "RecordBallon"
