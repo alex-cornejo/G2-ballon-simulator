@@ -22,9 +22,9 @@ public class DatasetGenerator {
 
     public void execute() throws IOException {
 
-        //remove old file if exists
+        // remove old file if exists
         File file = new File(this.outputFile);
-        if(file.exists()){
+        if (file.exists()) {
             file.delete();
         }
 
@@ -32,7 +32,7 @@ public class DatasetGenerator {
 
         for (int iChunk = 0; iChunk < chunks; iChunk++) {
             int tempAmount = 0;
-            if (iChunk == chunks - 1) {
+            if (iChunk == chunks - 1 && recordsAmount % Consts.BATCH_SIZE != 0) {
                 tempAmount = recordsAmount % Consts.BATCH_SIZE;
             } else {
                 tempAmount = Consts.BATCH_SIZE;
