@@ -93,7 +93,6 @@ public class Observatory {
         try {
             return ObservatoryEnum.valueOf(code);
         } catch (IllegalArgumentException ex) {
-            ex.printStackTrace();
             return ObservatoryEnum.OTHER;
         }
     }
